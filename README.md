@@ -21,10 +21,12 @@ Este es un proyecto web que permite gestionar un sorteo de "Amigo Secreto" de fo
 
 ## Capturas de Pantalla
 ### Agregar Nombres
-![Agregar Nombres](assets/captura-agregar-nombres.png)
+![Captura de pantalla 2025-03-17 213650](https://github.com/user-attachments/assets/42bd1f0a-9967-4e2c-a429-fa932ac2f96d)
+
 
 ### Sorteo Realizado
-![Sorteo Realizado](assets/captura-sorteo-realizado.png)
+![Captura de pantalla 2025-03-17 213508](https://github.com/user-attachments/assets/6c892209-a1bf-40e0-b70f-c660486985d9)
+
 
 ## Explicación del Código JavaScript
 El archivo `app.js` maneja la lógica principal del proyecto.
