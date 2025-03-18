@@ -1,106 +1,99 @@
-# challenge-amigo-secreto_esp-main
-Este proyecto es una página web interactiva desarrollada con HTML, CSS y JavaScript, que permite organizar un sorteo de "Amigo Secreto" de forma sencilla y divertida.
+# Challenge Alura Latam "Amigo Secreto"
+# Amigo Secreto
 
-Características Principales
+Este es un proyecto web que permite gestionar un sorteo de "Amigo Secreto" de forma sencilla e interactiva.
 
-Permite agregar nombres de participantes.
+## Tecnologías Utilizadas
+- **HTML5**
+- **CSS3**
+- **JavaScript**
 
-Lista a los participantes en pantalla.
+## Funcionalidades
+- Agregar nombres de participantes en el sorteo.
+- Visualizar la lista de amigos agregados.
+- Realizar el sorteo del "Amigo Secreto" de forma aleatoria.
 
-Realiza el sorteo del "Amigo Secreto", asignando aleatoriamente un amigo a cada participante.
+## Instrucciones de Uso
+1. Escribe el nombre del participante en el campo de texto.
+2. Haz clic en el botón "Añadir" para agregar el nombre a la lista.
+3. Repite este proceso para todos los participantes.
+4. Una vez agregados los nombres, haz clic en el botón "Sortear amigo" para que se realice el sorteo.
 
-Tecnologías Utilizadas
+## Capturas de Pantalla
+### Agregar Nombres
+![Agregar Nombres](assets/captura-agregar-nombres.png)
 
-HTML5 para la estructura del contenido.
+### Sorteo Realizado
+![Sorteo Realizado](assets/captura-sorteo-realizado.png)
 
-CSS3 para el diseño y la apariencia visual.
+## Explicación del Código JavaScript
+El archivo `app.js` maneja la lógica principal del proyecto.
 
-JavaScript para la lógica del sorteo y la interactividad.
-
-Instalación y Uso
-
-Clona este repositorio:
-
-git clone https://github.com/nor84/challenge-amigo-secreto_esp-main.git
-
-Abre el archivo index.html en tu navegador favorito.
-
-Escribe el nombre de los participantes en el campo de texto y haz clic en "Añadir".
-
-Cuando todos los nombres hayan sido agregados, haz clic en "Sortear amigo" para ver los resultados.
-
-Explicación del Código JavaScript
-
-El archivo app.js contiene la lógica principal del proyecto. A continuación se describe su funcionamiento:
-
-1. Agregar Amigos
-
-La función agregarAmigo() toma el valor ingresado en el campo de texto.
-
-Si el nombre no está vacío ni repetido, lo agrega a la lista de amigos.
-
-let amigos = [];
+### Funcionalidad de Agregar Amigos
+```javascript
+const amigos = [];
 
 function agregarAmigo() {
-    const input = document.getElementById('amigo');
+    const input = document.getElementById("amigo");
     const nombre = input.value.trim();
-
-    if (nombre && !amigos.includes(nombre)) {
+    if (nombre) {
         amigos.push(nombre);
-        actualizarLista();
-        input.value = '';
+        mostrarAmigos();
+        input.value = "";
     } else {
-        alert('El nombre está vacío o ya fue agregado.');
+        alert("Por favor, ingresa un nombre válido.");
     }
 }
 
-2. Actualizar la Lista de Amigos
-
-La función actualizarLista() muestra en pantalla los nombres que se han agregado.
-
-function actualizarLista() {
-    const lista = document.getElementById('listaAmigos');
-    lista.innerHTML = amigos.map(amigo => `<li>${amigo}</li>`).join('');
+function mostrarAmigos() {
+    const lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
+    amigos.forEach(amigo => {
+        const li = document.createElement("li");
+        li.textContent = amigo;
+        lista.appendChild(li);
+    });
 }
+```
 
-3. Sorteo de Amigo Secreto
-
-La función sortearAmigo() reorganiza aleatoriamente la lista de amigos y genera las combinaciones para el sorteo.
-
+### Funcionalidad del Sorteo
+```javascript
 function sortearAmigo() {
     if (amigos.length < 2) {
-        alert('Agrega al menos 2 amigos para realizar el sorteo.');
+        alert("Agrega al menos dos amigos para realizar el sorteo.");
         return;
     }
 
-    const resultado = document.getElementById('resultado');
-    let amigosSorteados = [...amigos];
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = "";
 
-    do {
-        amigosSorteados.sort(() => Math.random() - 0.5);
-    } while (!esValido(amigos, amigosSorteados));
+    const amigosSorteados = [...amigos];
+    for (let i = 0; i < amigos.length; i++) {
+        const amigo = amigos[i];
+        let amigoSecreto;
 
-    resultado.innerHTML = amigos.map((amigo, index) =>
-        `<li>${amigo} -> ${amigosSorteados[index]}</li>`).join('');
+        do {
+            const indiceAleatorio = Math.floor(Math.random() * amigosSorteados.length);
+            amigoSecreto = amigosSorteados[indiceAleatorio];
+        } while (amigo === amigoSecreto);
+
+        amigosSorteados.splice(amigosSorteados.indexOf(amigoSecreto), 1);
+
+        const li = document.createElement("li");
+        li.textContent = `${amigo} --> ${amigoSecreto}`;
+        resultado.appendChild(li);
+    }
 }
+```
 
-function esValido(listaOriginal, listaSorteada) {
-    return listaOriginal.every((amigo, index) => amigo !== listaSorteada[index]);
-}
+## Instalación
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/nor84/challenge-amigo-secreto_esp-main.git
+   ```
+2. Abre el archivo `index.html` en tu navegador favorito.
 
-Capturas de Pantalla
+## Autor
+**Norman Valenzuela Zavala**
 
-Ingreso de nombres:
-
-
-Sorteo de amigos:
-
-
-Autor
-
-Norman Valenzuela Zavala
-
-Si tienes alguna duda o sugerencia, no dudes en comunicarte.
-
-Este proyecto fue desarrollado como parte del Challenge Oracle ONE - Alura Latam.
 
