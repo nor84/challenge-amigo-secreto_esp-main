@@ -1,6 +1,4 @@
 # challenge-amigo-secreto_esp-main
-Amigo Secreto
-
 Este proyecto es una página web interactiva desarrollada con HTML, CSS y JavaScript, que permite organizar un sorteo de "Amigo Secreto" de forma sencilla y divertida.
 
 Características Principales
